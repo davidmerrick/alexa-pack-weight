@@ -12,7 +12,7 @@ app.launch((request, response) => {
 });
 
 app.intent("AMAZON.HelpIntent",{}, (request, response) => {
-    let speechOutput = "Help";
+    let speechOutput = "I can record pack weight to a Google Spreadsheet. Just tell me your name and pack weight.";
     response.say(speechOutput);
 });
 
