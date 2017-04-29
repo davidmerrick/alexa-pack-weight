@@ -1,4 +1,4 @@
-Boilerplate code for Lambda Alexa Skill in NodeJS.
+Lambda function for recording backpack weight to Google Spreadsheet.
 
 * Includes gulp config for deployment 
 
