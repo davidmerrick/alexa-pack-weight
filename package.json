@@ -4,9 +4,15 @@
   "description": "Alexa app for recording pack weight to Google spreadsheet.",
   "author": "David Merrick",
   "dependencies": {
-    "alexa-app": "^4.0.0"
+    "alexa-app": "^4.0.0",
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^19.0.0",
+    "moment-timezone": "^0.5.13",
+    "readline": "^1.3.0",
+    "should": "^11.2.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",

@@ -19,7 +19,7 @@ module.exports = {
     runtime: 'nodejs4.3'
 }
 ```
-3. Write the code for your app.
+3. Get an auth token using the code at https://github.com/davidmerrick/node-speed-test-uploader/blob/master/index.js.
 4. Deploy your code to your Lambda function:
 ```
 gulp deploy
