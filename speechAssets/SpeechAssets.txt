@@ -1,1 +1,19 @@
-AddPackWeightIntent Add pack weight of {weight} for user {user}
+RecordPackWeightIntent Add pack weight of {packWeight} for user {userName}
+RecordPackWeightIntent Add pack weight of {packWeight} for {userName}
+RecordPackWeightIntent Add pack weight of {packWeight} lbs for user {userName}
+RecordPackWeightIntent Add pack weight of {packWeight} lbs for {userName}
+
+RecordPackWeightIntent Record pack weight of {packWeight} for user {userName}
+RecordPackWeightIntent Record pack weight of {packWeight} for {userName}
+RecordPackWeightIntent Record pack weight of {packWeight} lbs for user {userName}
+RecordPackWeightIntent Record pack weight of {packWeight} lbs for {userName}
+
+RecordPackWeightIntent Add weight of {packWeight} for user {userName}
+RecordPackWeightIntent Add weight of {packWeight} for {userName}
+RecordPackWeightIntent Add weight of {packWeight} lbs for {userName}
+RecordPackWeightIntent Add weight of {packWeight} lbs for user {userName}
+
+RecordPackWeightIntent Record weight of {packWeight} for user {userName}
+RecordPackWeightIntent Record weight of {packWeight} for {userName}
+RecordPackWeightIntent Record weight of {packWeight} lbs for {userName}
+RecordPackWeightIntent Record weight of {packWeight} lbs for user {userName}
