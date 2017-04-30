@@ -1,17 +1,17 @@
 {
   "intents": [
     {
-      "intent": "AddPackWeightIntent",
       "slots": [
         {
-          "name": "user",
+          "name": "userName",
           "type": "AMAZON.US_FIRST_NAME"
         },
         {
-          "name": "weight",
+          "name": "packWeight",
           "type": "AMAZON.NUMBER"
         }
-      ]
+      ],
+      "intent": "RecordPackWeightIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
