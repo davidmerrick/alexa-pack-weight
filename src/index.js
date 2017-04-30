@@ -32,11 +32,19 @@ app.intent("RecordPackWeightIntent", {
             "packWeight": "AMAZON.NUMBER"
         }
     }, (request, response) => {
-        let userName = request.slot("userName");
-        let packWeight = request.slot("packWeight");
-        recordPackWeight(packWeight, userName);
-        let speechOutput = "I recorded that data to the spreadsheet for you.";
-        response.say(speechOutput);
+        return new Promise((resolve, reject) => {
+            let userName = request.slot("userName");
+            let packWeight = request.slot("packWeight");
+            recordPackWeight(packWeight, userName)
+                .then(result => {
+                    let speechOutput = "I recorded that data to the spreadsheet for you.";
+                    response.say(speechOutput);
+                })
+                .catch(err => {
+                    let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
+                    response.say(speechOutput);
+                });
+        });
 });
 
 app.intent("AMAZON.HelpIntent",{}, (request, response) => {
@@ -69,32 +77,34 @@ function recordPackWeight(packWeight, userName){
 }
 
 function appendSheetItems(oauth2Client, packWeight, userName) {
-    console.log("Appending data to sheet...");
-    let sheets = google.sheets('v4');
-    let now = moment.tz(TIMEZONE);
-    let dateString = now.format("MM/DD/YYYY");
-    var values = [
-        [dateString, packWeight, userName]
-    ];
-    var range = 'Sheet1!A2:C';
-    var body = {
-        range: range,
-        majorDimension: "ROWS",
-        values: values
-    }
-
-    sheets.spreadsheets.values.append({
-        auth: oauth2Client,
-        spreadsheetId: SHEET_ID,
-        range: range,
-        resource: body,
-        valueInputOption: "USER_ENTERED"
-    }, (err, response) => {
-        if (err) {
-            console.log('The API returned an error: ' + err);
-            return;
+    return new Promise((resolve, reject) => {
+        console.log("Appending data to sheet...");
+        let sheets = google.sheets('v4');
+        let now = moment.tz(TIMEZONE);
+        let dateString = now.format("MM/DD/YYYY");
+        var values = [
+            [dateString, packWeight, userName]
+        ];
+        var range = 'Sheet1!A2:C';
+        var body = {
+            range: range,
+            majorDimension: "ROWS",
+            values: values
         }
-        console.log("SUCCESS: Wrote data to spreadsheet.");
+
+        sheets.spreadsheets.values.append({
+            auth: oauth2Client,
+            spreadsheetId: SHEET_ID,
+            range: range,
+            resource: body,
+            valueInputOption: "USER_ENTERED"
+        }, (err, result) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
     });
 }
 
