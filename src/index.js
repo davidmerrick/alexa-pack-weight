@@ -37,12 +37,16 @@ app.intent("RecordPackWeightIntent", {
             let packWeight = request.slot("packWeight");
             recordPackWeight(packWeight, userName)
                 .then(result => {
-                    let speechOutput = "I recorded that data to the spreadsheet for you.";
-                    response.say(speechOutput);
+                    resolve(() => {
+                        let speechOutput = "I recorded that data to the spreadsheet for you.";
+                        response.say(speechOutput);
+                    });
                 })
                 .catch(err => {
-                    let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
-                    response.say(speechOutput);
+                    reject(() => {
+                        let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
+                        response.say(speechOutput);
+                    });
                 });
         });
 });
