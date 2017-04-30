@@ -1,22 +1,12 @@
-import fs from 'fs'
-import readline from 'readline'
-import googleAuth from 'google-auth-library'
-import moment from 'moment-timezone'
-import google from 'googleapis'
-import should from 'should'
+import googleAuth from "google-auth-library";
+import moment from "moment-timezone";
+import google from "googleapis";
+import should from "should";
 
 const SHEET_ID = process.env.SHEET_ID;
 should.exist(SHEET_ID);
 
 const TIMEZONE = process.env.TIMEZONE || 'America/Los_Angeles';
-const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-should.exist(CLIENT_SECRET);
-const CLIENT_ID = process.env.CLIENT_ID;
-should.exist(CLIENT_ID);
-const REDIRECT_URI = process.env.REDIRECT_URI;
-should.exist(REDIRECT_URI);
 
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 should.exist(ACCESS_TOKEN);
@@ -26,7 +16,8 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 should.exist(REFRESH_TOKEN);
 
 var auth = new googleAuth();
-var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+var oauth2Client = new auth.OAuth2();
+
 oauth2Client.credentials = {
     access_token: ACCESS_TOKEN,
     expiry_date: EXPIRY_DATE,
