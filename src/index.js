@@ -32,23 +32,17 @@ app.intent("RecordPackWeightIntent", {
             "packWeight": "AMAZON.NUMBER"
         }
     }, (request, response) => {
-        return new Promise((resolve, reject) => {
-            let userName = request.slot("userName");
-            let packWeight = request.slot("packWeight");
-            recordPackWeight(packWeight, userName)
-                .then(result => {
-                    resolve(() => {
-                        let speechOutput = "I recorded that data to the spreadsheet for you.";
-                        response.say(speechOutput);
-                    });
-                })
-                .catch(err => {
-                    reject(() => {
-                        let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
-                        response.say(speechOutput);
-                    });
-                });
-        });
+        let userName = request.slot("userName");
+        let packWeight = request.slot("packWeight");
+        return recordPackWeight(packWeight, userName)
+            .then(result => {
+                let speechOutput = "I recorded that data to the spreadsheet for you.";
+                response.say(speechOutput);
+            })
+            .catch(err => {
+                let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
+                response.say(speechOutput);
+            });
 });
 
 app.intent("AMAZON.HelpIntent",{}, (request, response) => {
