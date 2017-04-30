@@ -25,34 +25,60 @@ oauth2Client.credentials = {
     token_type: "Bearer"
 };
 
-appendSheetItems(oauth2Client);
+let packWeight = 25;
+let userName = "Becca";
+recordPackWeight(packWeight, userName)
+    .then(result => {
+        console.log("Success!");
+    })
+    .catch(err => {
+        console.error("Fail.");
+    });
 
-function appendSheetItems(oauth2Client) {
-    console.log("Appending data to sheet...");
-    let sheets = google.sheets('v4');
-    let now = moment.tz(TIMEZONE);
-    let dateString = now.format("MM/DD/YYYY");
-    var values = [
-        [dateString, "Foo", "Bar"]
-    ];
-    var range = 'Sheet1!A2:C';
-    var body = {
-        range: range,
-        majorDimension: "ROWS",
-        values: values
-    }
 
-    sheets.spreadsheets.values.append({
-        auth: oauth2Client,
-        spreadsheetId: SHEET_ID,
-        range: range,
-        resource: body,
-        valueInputOption: "USER_ENTERED"
-    }, (err, response) => {
-        if (err) {
-            console.log('The API returned an error: ' + err);
-            return;
+function recordPackWeight(packWeight, userName){
+    var auth = new googleAuth();
+    var oauth2Client = new auth.OAuth2();
+
+    oauth2Client.credentials = {
+        access_token: ACCESS_TOKEN,
+        expiry_date: EXPIRY_DATE,
+        refresh_token: REFRESH_TOKEN,
+        token_type: "Bearer"
+    };
+
+    return appendSheetItems(oauth2Client, packWeight, userName);
+}
+
+function appendSheetItems(oauth2Client, packWeight, userName) {
+    return new Promise((resolve, reject) => {
+        console.log("Appending data to sheet...");
+        let sheets = google.sheets('v4');
+        let now = moment.tz(TIMEZONE);
+        let dateString = now.format("MM/DD/YYYY");
+        var values = [
+            [dateString, packWeight, userName]
+        ];
+        var range = 'Sheet1!A2:C';
+        var body = {
+            range: range,
+            majorDimension: "ROWS",
+            values: values
         }
-        console.log("SUCCESS: Wrote data to spreadsheet.");
+
+        sheets.spreadsheets.values.append({
+            auth: oauth2Client,
+            spreadsheetId: SHEET_ID,
+            range: range,
+            resource: body,
+            valueInputOption: "USER_ENTERED"
+        }, (err, result) => {
+            if(err) {
+                console.error(err);
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
     });
 }

@@ -73,7 +73,7 @@ function recordPackWeight(packWeight, userName){
         token_type: "Bearer"
     };
 
-    appendSheetItems(oauth2Client, packWeight, userName);
+    return appendSheetItems(oauth2Client, packWeight, userName);
 }
 
 function appendSheetItems(oauth2Client, packWeight, userName) {
@@ -100,6 +100,7 @@ function appendSheetItems(oauth2Client, packWeight, userName) {
             valueInputOption: "USER_ENTERED"
         }, (err, result) => {
             if(err) {
+                console.error(err);
                 reject(err);
             } else {
                 resolve(result);
