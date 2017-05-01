@@ -25,7 +25,18 @@ var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
 console.log("Authorizing...");
 authorize(() => {
-    console.log(`SUCCESS. Saved new token in ${TOKEN_DIR}`);
+    let sheets = google.sheets('v4');
+    sheets.spreadsheets.values.get({
+        auth: oauth2Client,
+        spreadsheetId: SHEET_ID,
+        range: 'A1'
+    }, (err, result) => {
+        if(err) {
+            console.error(err);
+        } else {
+            console.log(`SUCCESS. Tested token and saved it in ${TOKEN_DIR}`);
+        }
+    });
 });
 
 /**
