@@ -35,6 +35,7 @@ authorize(() => {
             console.error(err);
         } else {
             console.log(`SUCCESS. Tested token and saved it in ${TOKEN_DIR}`);
+            process.exit(0);
         }
     });
 });
@@ -69,7 +70,8 @@ function authorize(callback) {
 function getNewToken(oauth2Client, callback) {
     let authUrl = oauth2Client.generateAuthUrl({
         access_type: 'offline',
-        scope: SCOPES
+        scope: SCOPES,
+        prompt: 'consent' // Needed to generate "refresh_token" every time.
     });
     console.log('Authorize this app by visiting this url: ', authUrl);
     let rl = readline.createInterface({

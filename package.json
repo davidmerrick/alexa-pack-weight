@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Alexa app for recording pack weight to Google spreadsheet.",
   "author": "David Merrick",
+  "scripts": {
+    "clean": "gulp clean",
+    "install": "gulp js"
+  },
   "dependencies": {
     "alexa-app": "^4.0.0",
     "google-auth-library": "^0.10.0",
