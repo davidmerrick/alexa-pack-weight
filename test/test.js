@@ -29,8 +29,16 @@ oauth2Client.credentials = {
     token_type: "Bearer"
 };
 
-let packWeight = 25;
+let packWeight = "";
 let userName = "Becca";
+
+try {
+    should.exist(packWeight);
+    should.not.be.empty(packWeight);
+} catch(e) {
+    console.error("Please specify a valid pack weight");
+    process.exit(1);
+};
 
 recordPackWeight(packWeight, userName)
     .then(result => {
