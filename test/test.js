@@ -30,7 +30,15 @@ oauth2Client.credentials = {
 };
 
 let packWeight = "";
-let userName = "Becca";
+let userName = "foo";
+
+try {
+    should.exist(userName);
+    should.not.be.empty(userName);
+} catch(e) {
+    console.error("Please specify a valid pack weight");
+    process.exit(1);
+};
 
 try {
     should.exist(packWeight);

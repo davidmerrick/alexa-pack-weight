@@ -26,39 +26,42 @@ app.launch((request, response) => {
         .shouldEndSession(false);
 });
 
-app.intent("RecordPackWeightIntent", {
-        "slots": {
-            "userName": "AMAZON.US_FIRST_NAME",
-            "packWeight": "AMAZON.NUMBER"
+app.intent("RecordPackWeightIntent",
+        {
+            "slots": {
+                "userName": "AMAZON.US_FIRST_NAME",
+                "packWeight": "AMAZON.NUMBER"
+            }
+        },
+        (request, response) => {
+            let userName = request.slot("userName");
+            let packWeight = request.slot("packWeight");
+
+            try {
+                should.exist(userName);
+                should.not.be.empty(userName);
+            } catch(e) {
+                return response.say("Please specify a valid user name.");
+            };
+
+            try {
+                should.exist(packWeight);
+                should.not.be.empty(packWeight);
+            } catch(e) {
+                return response.say("Please specify a valid pack weight.");
+            };
+
+            return recordPackWeight(packWeight, userName)
+                .then(result => {
+                    let speechOutput = "I recorded that data to the spreadsheet for you.";
+                    response.say(speechOutput);
+                })
+                .catch(err => {
+                    let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
+                    response.say(speechOutput);
+                });
         }
-    }, (request, response) => {
-        let userName = request.slot("userName");
-        let packWeight = request.slot("packWeight");
-
-        try {
-            should.exist(userName);
-            should.not.be.empty(userName);
-        } catch(e) {
-            return response.say("Please specify a valid user name");
-        };
-
-        try {
-            should.exist(packWeight);
-            should.not.be.empty(packWeight);
-        } catch(e) {
-            return response.say("Please specify a valid pack weight");
-        };
-
-        return recordPackWeight(packWeight, userName)
-            .then(result => {
-                let speechOutput = "I recorded that data to the spreadsheet for you.";
-                response.say(speechOutput);
-            })
-            .catch(err => {
-                let speechOutput = "Sorry, an error occurred while appending data to the spreadsheet.";
-                response.say(speechOutput);
-            });
-});
+);
 
 app.intent("AMAZON.HelpIntent",{}, (request, response) => {
     let speechOutput = "I can record pack weight to a Google Spreadsheet. Just tell me your name and pack weight.";
