@@ -39,14 +39,14 @@ app.intent("RecordPackWeightIntent", {
             should.exist(userName);
             should.not.be.empty(userName);
         } catch(e) {
-            response.say("Please specify a valid user name");
+            return response.say("Please specify a valid user name");
         };
 
         try {
             should.exist(packWeight);
             should.not.be.empty(packWeight);
         } catch(e) {
-            response.say("Please specify a valid pack weight");
+            return response.say("Please specify a valid pack weight");
         };
 
         return recordPackWeight(packWeight, userName)
