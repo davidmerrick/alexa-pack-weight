@@ -37,20 +37,6 @@ app.intent("RecordPackWeightIntent",
             let userName = request.slot("userName");
             let packWeight = request.slot("packWeight");
 
-            try {
-                should.exist(userName);
-                should.not.be.empty(userName);
-            } catch(e) {
-                return response.say(`Please specify a valid user name. You said ${userName}.`);
-            };
-
-            try {
-                should.exist(packWeight);
-                should.not.be.empty(packWeight);
-            } catch(e) {
-                return response.say(`Please specify a valid pack weight. You said ${packWeight}.`);
-            };
-
             return recordPackWeight(packWeight, userName)
                 .then(result => {
                     let speechOutput = "I recorded that data to the spreadsheet for you.";
