@@ -19,34 +19,11 @@ const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 should.exist(ACCESS_TOKEN);
 const EXPIRY_DATE = process.env.EXPIRY_DATE;
 should.exist(EXPIRY_DATE);
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
+should.exist(REFRESH_TOKEN);
 
-var auth = new googleAuth();
-var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-
-oauth2Client.credentials = {
-    access_token: ACCESS_TOKEN,
-    expiry_date: EXPIRY_DATE,
-    token_type: "Bearer"
-};
-
-let packWeight = "";
+let packWeight = "10";
 let userName = "foo";
-
-try {
-    should.exist(userName);
-    should.not.be.empty(userName);
-} catch(e) {
-    console.error("Please specify a valid pack weight");
-    process.exit(1);
-};
-
-try {
-    should.exist(packWeight);
-    should.not.be.empty(packWeight);
-} catch(e) {
-    console.error("Please specify a valid pack weight");
-    process.exit(1);
-};
 
 recordPackWeight(packWeight, userName)
     .then(result => {
@@ -59,10 +36,11 @@ recordPackWeight(packWeight, userName)
 
 function recordPackWeight(packWeight, userName){
     var auth = new googleAuth();
-    var oauth2Client = new auth.OAuth2();
+    var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
     oauth2Client.credentials = {
         access_token: ACCESS_TOKEN,
+        refresh_token: REFRESH_TOKEN,
         expiry_date: EXPIRY_DATE,
         token_type: "Bearer"
     };
