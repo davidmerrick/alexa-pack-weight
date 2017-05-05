@@ -2,6 +2,7 @@ import googleAuth from "google-auth-library";
 import moment from "moment-timezone";
 import google from "googleapis";
 import should from "should";
+import _ from 'lodash';
 
 const SHEET_ID = process.env.SHEET_ID;
 should.exist(SHEET_ID);
@@ -30,7 +31,7 @@ recordPackWeight(packWeight, userName)
         console.log("Success!");
     })
     .catch(err => {
-        console.error("Fail.");
+        console.error(err);
     });
 
 
@@ -52,10 +53,11 @@ function appendSheetItems(oauth2Client, packWeight, userName) {
     return new Promise((resolve, reject) => {
         console.log("Appending data to sheet...");
         let sheets = google.sheets('v4');
+        let formattedUserName = _.capitalize(userName);
         let now = moment.tz(TIMEZONE);
         let dateString = now.format("MM/DD/YYYY");
         var values = [
-            [dateString, packWeight, userName]
+            [dateString, packWeight, formattedUserName]
         ];
         var range = 'Sheet1!A2:C';
         var body = {
