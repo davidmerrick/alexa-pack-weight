@@ -47,7 +47,8 @@ app.intent("RecordPackWeightIntent",
 
             return recordPackWeight(packWeight, userName)
                 .then(result => {
-                    let speechOutput = "I recorded that data to the spreadsheet for you.";
+                    //let speechOutput = "I recorded that data to the spreadsheet for you.";
+                    let speechOutput = `I recorded that data (${userName}, ${packWeight}) to the spreadsheet for you.`;
                     response.say(speechOutput);
                 })
                 .catch(err => {
