@@ -39,7 +39,7 @@ app.intent("RecordPackWeightIntent",
         {
             "slots": {
                 "userName": "AMAZON.US_FIRST_NAME",
-                "packWeight": "AMAZON.LITERAL"
+                "packWeight": "AMAZON.NUMBER"
             }
         },
         (request, response) => {
