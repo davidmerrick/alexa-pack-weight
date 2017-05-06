@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/davidmerrick/alexa-pack-weight.svg?branch=master)](https://travis-ci.org/davidmerrick/alexa-pack-weight)
+
 Lambda function for recording backpack weight to Google Spreadsheet.
 
 * Includes gulp config for deployment 
