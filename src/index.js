@@ -5,7 +5,7 @@ import google from "googleapis";
 import should from "should";
 import _ from 'lodash';
 
-const APP_NAME = "Base-Node-Alexa";
+const APP_NAME = "Alexa-Pack-Weight";
 var app = new alexa.app(APP_NAME);
 
 const SHEET_ID = process.env.SHEET_ID;
@@ -34,7 +34,10 @@ app.launch((request, response) => {
         .shouldEndSession(false);
 });
 
-// Note about decimal numbers: https://www.domsmith.co.uk/blog/2017/01/22/pain-with-decimals-in-alexa-development/
+// Note about decimal numbers:
+// The Echo API currently doesn't support them, and there's no viable workaround.
+// https://www.domsmith.co.uk/blog/2017/01/22/pain-with-decimals-in-alexa-development/
+
 app.intent("RecordPackWeightIntent",
         {
             "slots": {
