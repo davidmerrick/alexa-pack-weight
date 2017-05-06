@@ -2,6 +2,14 @@ Lambda function for recording backpack weight to Google Spreadsheet.
 
 * Includes gulp config for deployment 
 
+## Notes:
+
+* Note about decimal numbers:
+    * Unfortunately, the Echo API currently doesn't support them, and there's no viable workaround.
+    * Reference:
+        * https://www.domsmith.co.uk/blog/2017/01/22/pain-with-decimals-in-alexa-development/
+        * https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference#number
+
 ## Usage:
 
 1. Set up an IAM role or user with Lambda access using the "AWSLambdaFullAccess" policy.
