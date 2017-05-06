@@ -8,7 +8,7 @@
         },
         {
           "name": "packWeight",
-          "type": "AMAZON.NUMBER"
+          "type": "AMAZON.LITERAL"
         }
       ],
       "intent": "RecordPackWeightIntent"

@@ -34,11 +34,12 @@ app.launch((request, response) => {
         .shouldEndSession(false);
 });
 
+// Note about decimal numbers: https://www.domsmith.co.uk/blog/2017/01/22/pain-with-decimals-in-alexa-development/
 app.intent("RecordPackWeightIntent",
         {
             "slots": {
                 "userName": "AMAZON.US_FIRST_NAME",
-                "packWeight": "AMAZON.NUMBER"
+                "packWeight": "AMAZON.LITERAL"
             }
         },
         (request, response) => {
