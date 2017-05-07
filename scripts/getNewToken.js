@@ -33,7 +33,6 @@ getNewToken(oauth2Client => {
     });
 });
 
-
 function getNewToken(callback) {
     let auth = new googleAuth();
     let oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
