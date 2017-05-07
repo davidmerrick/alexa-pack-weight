@@ -98,11 +98,11 @@ function appendSheetItems(oauth2Client, packWeight, userName) {
         let formattedUserName = _.capitalize(userName);
         let now = moment.tz(TIMEZONE);
         let dateString = now.format("MM/DD/YYYY");
-        var values = [
+        let values = [
             [dateString, packWeight, formattedUserName]
         ];
-        var range = 'Sheet1!A2:C';
-        var body = {
+        let range = 'Sheet1!A2:C';
+        let body = {
             range: range,
             majorDimension: "ROWS",
             values: values
@@ -117,10 +117,10 @@ function appendSheetItems(oauth2Client, packWeight, userName) {
         }, (err, result) => {
             if(err) {
                 console.error(err);
-                reject(err);
-            } else {
-                resolve(result);
+                return reject(err);
             }
+
+            resolve(result);
         });
     });
 }
