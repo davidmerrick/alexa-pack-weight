@@ -7,6 +7,9 @@
     "clean": "gulp clean",
     "install": "gulp js"
   },
+  "alexa": {
+    "applicationId": "amzn1.ask.skill.c7f1d7d4-48af-4d21-af08-b73c16f6b9ed"
+  },
   "dependencies": {
     "alexa-app": "^4.0.0",
     "google-auth-library": "^0.10.0",
@@ -17,6 +20,7 @@
     "should": "^11.2.1"
   },
   "devDependencies": {
+    "alexa-app-server": "^3.0.1",
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "del": "^2.2.2",

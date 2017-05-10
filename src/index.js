@@ -5,8 +5,9 @@ import google from "googleapis";
 import should from "should";
 import _ from 'lodash';
 
-const APP_NAME = "Alexa-Pack-Weight";
+const APP_NAME = "alexa_pack_weight";
 var app = new alexa.app(APP_NAME);
+app.id = require('../package.json').alexa.applicationId;
 
 const SHEET_ID = process.env.SHEET_ID;
 should.exist(SHEET_ID);
@@ -125,4 +126,5 @@ function appendSheetItems(oauth2Client, packWeight, userName) {
     });
 }
 
-exports.handler = app.lambda();
+//exports.handler = app.lambda();
+export default app
